@@ -4,10 +4,10 @@ import classes from './Cockpit.css'
 const Cockpit = (props) => {
 
     const assignedClasses = [];
-    let btnClass = '';
+    let btnClass = classes.Button;
     
     if(props.showPersons) {
-        btnClass = classes.Red;
+        btnClass = [classes.Button, classes.Red].join(' ');
     }    
     if (props.persons.length <= 2) {
       assignedClasses.push(classes.red);
@@ -17,14 +17,14 @@ const Cockpit = (props) => {
     }
     
     return (
-        <div className={classes.Cockpit}>
+        <React.Fragment>
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>Welcome to react!!!</p>
      
             <button className={btnClass}
             onClick={props.clicked}>Show/Hide Persons
             </button>
-        </div>
+        </React.Fragment>
     )
 }
 
