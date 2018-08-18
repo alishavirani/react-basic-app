@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import classes from'./App.css';
 import PersonList from '../components/PersonList/PersonList'
 import Cockpit from '../components/cockpit/Cockpit'
-import WithClass from '../hoc/WithClass'
+import withClass from '../hoc/withClass'
 
 class App extends PureComponent {
 
@@ -14,7 +14,8 @@ class App extends PureComponent {
         {id: 'cgvhbjnnm',name: "Ali", age: 22},
         {id: 'ghkjlhjkm',name: "Sha", age: 22}
       ],
-      showPersons: false
+      showPersons: false,
+      toggleClicked:0
     }
     console.log("App.js//Inside constructor!!!!!");
   }
@@ -60,7 +61,12 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    });
   }
 
 
@@ -82,7 +88,7 @@ class App extends PureComponent {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <React.Fragment>
         <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
 
         <Cockpit 
@@ -91,9 +97,9 @@ class App extends PureComponent {
           persons={this.state.persons}
           clicked={this.togglePersonsHandler} />     
         {persons}
-      </WithClass>
+      </React.Fragment>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Person from './Person/person'
+import Person from './Person/Person'
 
 class PersonList extends PureComponent {
     constructor(props) {

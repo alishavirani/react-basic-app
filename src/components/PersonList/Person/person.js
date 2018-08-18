@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './Person.css'
-import WithClass from '../../../hoc/WithClass'
+import withClass from '../../../hoc/withClass'
 
 class Person extends Component {
     constructor(props) {
@@ -18,13 +19,20 @@ class Person extends Component {
     render() {
         console.log("Person.js//Inside render!!!!!")
         return (
-        <WithClass classes={classes.Person}>
+        <React.Fragment>
             <p onClick={this.props.click}>I am {this.props.name} and I am {this.props.age} years old</p>
             <p>{this.props.children}</p>
             <input type="text" onChange={this.props.changed}></input>
-        </WithClass>
+        </React.Fragment>
         )
     }
 }
 
-export default Person;
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+
+export default withClass(Person,classes.Person);
